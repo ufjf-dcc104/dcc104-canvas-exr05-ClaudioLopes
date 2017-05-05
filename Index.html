@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Duelo</title>
+    <script src="Sprite.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+    var eCanvas = document.getElementsByTagName("canvas")[0];
+    var ctx = eCanvas.getContext("2d");
+
+    eCanvas.width = 1000;
+    eCanvas.height = 500;
+
+    var fps = 120;
+    var dt = -1/fps;
+
+    var player1 = new Sprite();
+    var player2 = new Sprite();
+
+    player1.x = 50;
+    player1.y = 50;
+    player1.color = "blue";
+
+    player2.x = 950;
+    player2.y = 450;
+    player2.color = "red";
+
+    desenha();
+
+    function desenha(){
+      requestAnimationFrame(desenha);
+      ctx.clearRect(0,0,eCanvas.width,eCanvas.height);
+      ctx.strokeRect(0,0,eCanvas.width,eCanvas.height);
+
+      desenhaCenario();
+
+      player1.desenhar(ctx);
+      player2.desenhar(ctx);
+
+      player1.mover(dt);
+      player2.mover(dt);
+    }
+
+    function desenhaCenario(){
+      ctx.fillStyle = "black";
+      ctx.fillRect(100,100,15,100);
+      ctx.fillRect(330,580,15,100);
+      ctx.fillRect(800,450,100,15);
+      ctx.fillRect(500,104,15,100);
+      ctx.fillRect(256,200,100,15);
+      ctx.fillRect(194,8,15,100);
+
+      ctx.fillRect(950,250,15,100);
+      ctx.fillRect(580,330,15,100);
+      ctx.fillRect(850,150,100,15);
+      ctx.fillRect(104,500,15,100);
+      ctx.fillRect(150,356,100,15);
+      ctx.fillRect(708,144,15,100);
+    }
+
+    addEventListener("keydown", function(e){
+        switch (e.keyCode) {
+          case 37:
+            player1.ax = -100;
+            break;
+          case 38:
+            player1.ay = -50;
+            break;
+          case 39:
+            player1.ax = 100;
+            break;
+          case 40:
+            player1.ay = 50;
+            break;
+          default:
+
+        }
+      });
+
+      addEventListener("keyup", function(e){
+        switch (e.keyCode) {
+          case 37:
+            player1.ax = 0;
+            break;
+          case 38:
+            player1.ax = 0;
+            break;
+          case 39:
+            player1.ay = 0;
+            break;
+          case 40:
+            player1.ay = 0;
+            break;
+          default:
+        }
+      });
+
+      /*addEventListener("keydown", function(e){
+          switch (e.keyCode) {
+            case d:
+              player2.ax = -100;
+              break;
+            case s:
+              player2.ay = -50;
+              break;
+            case a:
+              player2.ax = 100;
+              break;
+            case w:
+              player2.ay = 50;
+              break;
+            default:
+
+          }
+        });
+
+        addEventListener("keyup", function(e){
+          switch (e.keyCode) {
+            case d:
+              player2.ax = 0;
+              break;
+            case s:
+              player2.ax = 0;
+              break;
+            case a:
+              player2.ay = 0;
+              break;
+            case w:
+              player2.ay = 0;
+              break;
+            default:
+          }
+        });*/
+
+    </script>
+  </body>
+</html>
